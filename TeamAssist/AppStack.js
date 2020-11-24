@@ -5,7 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from './Pages/Splash'
 import WelcomePage from './Pages/WelcomePage'
-import TestPage from './Pages/TestPage';
+import SignInPage from './Pages/SignInPage';
+import OtpPage from './Pages/OtpPage';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,7 +18,12 @@ const StackScreen = ({ navigation }) => (
         />
         <Stack.Screen name="WelcomePage" component={WelcomePage} 
         options={{ headerShown: false }}/>
-        <Stack.Screen name="TestPage" component={TestPage} />
+        <Stack.Screen name="SignInPage" component={SignInPage}
+        options={{ headerShown: false }}
+        />
+        <Stack.Screen name="OtpPage" component={OtpPage}
+        options={{ headerShown: false }}
+        />
     </Stack.Navigator>
 );
 

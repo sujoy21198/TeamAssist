@@ -21,7 +21,7 @@ export default class WelcomPage extends Component {
                     <Text style={styles.subTitle}>Bring together your files, your projects and peoples.</Text>
                 </View>
 
-                <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('TestPage')}>
+                <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('SignInPage')}>
                     <Text style={styles.buttonText}>        Sign in</Text>
                 </Button>
             </SafeAreaView>
