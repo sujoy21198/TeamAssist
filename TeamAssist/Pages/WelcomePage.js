@@ -13,16 +13,13 @@ export default class WelcomPage extends Component {
                 <View style={styles.logo}>
                     <Webstep />
                 </View>
-                <View style={styles.shadow}>
-                    <Shadow />
-                </View>
                 <View style={styles.textArea}>
                     <Text style={styles.textStyle}>Team Assist Collaboration</Text>
                     <Text style={styles.subTitle}>Bring together your files, your projects and peoples.</Text>
                 </View>
 
                 <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('SignInPage')}>
-                    <Text style={styles.buttonText}>        Sign in</Text>
+                    <Text style={styles.buttonText}>         Log in</Text>
                 </Button>
             </SafeAreaView>
         );
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
     textArea:{
         alignSelf:'center',
         alignContent:'center',
-        marginTop:30
+        marginTop:60
     },
     textStyle:{
         fontFamily:'Poppins-Light',
@@ -55,7 +52,7 @@ const styles = StyleSheet.create({
     },
     subTitle:{
         color:'#89919d',
-        fontSize:12,
+        fontSize:13,
         fontFamily:'Poppins-Regular',
         alignSelf:'center'
     },

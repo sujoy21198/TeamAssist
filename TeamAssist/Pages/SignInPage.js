@@ -9,16 +9,16 @@ export default class SignInPage extends Component {
             <SafeAreaView style={styles.container}>
                 <StatusBar translucent backgroundColor="transparent" />
                 <View style={styles.textArea}>
-                    <Text style={styles.textStyle}>Welcome back</Text>
+                    <Text style={styles.textStyle}>Log in</Text>
                 </View>
                 <View>
-                    <Text style={styles.mobileNumberText}>Mobile number</Text>
+                    <Text style={styles.mobileNumberText}>Log in with mobile number</Text>
                 </View>
                 <Item regular style={styles.inpStyle} >
                     <Input placeholder="Regular test box" keyboardType='numeric' style={{color:"#fff"}}/>
                 </Item>
                 <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('OtpPage')}>
-                    <Text style={styles.buttonText}>        Submit</Text>
+                    <Text style={styles.buttonText}>        Log in</Text>
                 </Button>
             </SafeAreaView>
         );

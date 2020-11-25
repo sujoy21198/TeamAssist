@@ -18,15 +18,12 @@ export default class Splash extends Component{
 
     render(){
         return(
-            <View style={{height: '100%', backgroundColor: BaseColor.BackgroundColor }}>
+            <View style={{flex:1,height: '100%', backgroundColor: BaseColor.BackgroundColor }}>
                 <StatusBar barStyle="dark-content" hidden={false} backgroundColor={BaseColor.ColorWhite} translucent={true} />
-                <View style={{alignSelf: 'center',marginTop:300 }}>
+                <View style={{flex:1,alignSelf: 'center',justifyContent:'center' }}>
                     <Animatable.View animation="slideInDown" iterationCount={5} direction="alternate">
                         <Webstep/>
                     </Animatable.View>
-                </View>
-                <View style={{alignSelf: 'center'}}>
-                    <Shadow />
                 </View>
             </View>
         );

@@ -37,10 +37,10 @@ export default class OtpPage extends Component {
                     inputCellLength={1}
                     secureTextEntry= {true}
                 />
-                <Item></Item>
+                <Item style={{marginTop:30}}></Item>
                 <View style={styles.resendView}>
                 <Text style={styles.resendText}>If you didn't receive a code !</Text>
-                <TouchableOpacity onPress={()=> this.resend()}>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomePage')}>
                 <Text style={styles.whiteText}>Resend</Text>
                 </TouchableOpacity>
                 </View>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: BaseColor.BackgroundColor,
     },
     textArea: {
-        marginTop: 300,
+        marginTop: 250,
         marginLeft: 20
     },
     textStyle: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     subtitle: {
         color: "#89919d",
         marginTop: 10,
-        fontSize: 12,
+        fontSize: 13,
         marginLeft: 20
     },
     roundedTextInput: {
@@ -81,17 +81,20 @@ const styles = StyleSheet.create({
     },
     otpContainer: {
         width: '90%',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignSelf: 'center',
         margin: 10
     },
     resendView:{
-        flexDirection:'row'
+        flexDirection:'row',
+        alignContent:'flex-end',
+        alignSelf:'flex-end',
+        marginRight: 20
     },
     resendText:{
         color: "#89919d",
         marginTop: 30,
-        fontSize: 12,
+        fontSize: 13,
         marginLeft: 20
     },
     whiteText:{
