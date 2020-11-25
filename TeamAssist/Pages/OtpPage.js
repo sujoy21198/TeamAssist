@@ -6,26 +6,10 @@ import BaseColor from '../Core/BaseTheme';
 
 export default class OtpPage extends Component {
 
-    state = {
-        otpInput: '',
-        inputText: '',
-    };
+    resend = () => {
+        alert("resend Pressed");
+    }
 
-    alertText = () => {
-        const { otpInput = '' } = this.state;
-        if (otpInput) {
-            Alert.alert(otpInput);
-        }
-    };
-
-    clear = () => {
-        this.input1.clear();
-    };
-
-    updateOtpText = () => {
-        // will automatically trigger handleOnTextChange callback passed
-        this.input1.setValue(this.state.inputText);
-    };
     render() {
         return (
             // <View style={styles.container}>
@@ -51,11 +35,12 @@ export default class OtpPage extends Component {
                     textInputStyle={styles.roundedTextInput}
                     inputCount={4}
                     inputCellLength={1}
+                    secureTextEntry= {true}
                 />
                 <Item></Item>
                 <View style={styles.resendView}>
                 <Text style={styles.resendText}>If you didn't receive a code !</Text>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={()=> this.resend()}>
                 <Text style={styles.whiteText}>Resend</Text>
                 </TouchableOpacity>
                 </View>
@@ -90,7 +75,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         height: 70,
-        marginTop: 10
+        marginTop: 10,
+        color:"#fff",
+        fontSize:30
     },
     otpContainer: {
         width: '90%',
