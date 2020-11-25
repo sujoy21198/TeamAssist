@@ -1,7 +1,11 @@
 const BaseColor = {
-    BackgroundColor: '#44546a',
+    BackgroundColor: '#fff',
     ColorWhite: '#fff',
-    ColorBlack: '#000'
+    ColorBlack: '#000',
+    CommonTextColor: '#44546a',
+    AboveFieldTextColor: '#89919d',
+    BorderColor: '#e6e6e6',
+    SecondContainer : '#58687d'
 }
 
 export default BaseColor;

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Light',
         alignSelf:'center',
         fontSize:25,
-        color:'#fff',
+        color:BaseColor.CommonTextColor,
         fontWeight:'bold'
     },
     subTitle:{
@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     buttonStyle:{
-        backgroundColor:"#fff",
+        backgroundColor:BaseColor.CommonTextColor,
         width:150,
         marginTop:80,
         alignSelf:'center',
         borderRadius: 10,
     },
     buttonText:{
-        color: '#89919d',
+        color: BaseColor.ColorWhite,
         fontFamily: 'Poppins-Light',
     }
 });

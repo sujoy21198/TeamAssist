@@ -15,7 +15,7 @@ export default class SignInPage extends Component {
                     <Text style={styles.mobileNumberText}>Log in with mobile number</Text>
                 </View>
                 <Item regular style={styles.inpStyle} >
-                    <Input placeholder="Regular test box" keyboardType='numeric' style={{color:"#fff"}}/>
+                    <Input keyboardType='numeric' style={{color:"#fff"}}/>
                 </Item>
                 <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('OtpPage')}>
                     <Text style={styles.buttonText}>        Log in</Text>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     textStyle:{
         fontFamily:'Poppins-Light',
         fontSize:25,
-        color:'#fff',
+        color:BaseColor.CommonTextColor,
         fontWeight:'bold'
     },
     mobileNumberText:{
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     buttonStyle:{
-        backgroundColor:"#fff",
+        backgroundColor:BaseColor.CommonTextColor,
         alignSelf:'flex-end',
         marginRight:20,
         marginTop:30,
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
         borderRadius:5
     },
     buttonText:{
-        color:'#89919d',
+        color:BaseColor.ColorWhite,
     }
 })

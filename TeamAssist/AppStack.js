@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import {Text} from 'react-native'
 import Icon from 'react-native-vector-icons/EvilIcons';
 import BaseColor from './Core/BaseTheme';
 import Splash from './Pages/Splash'
@@ -35,11 +36,16 @@ const StackScreen = ({ navigation }) => (
                         name='navicon'
                         size={30}
                         style={{ margin: 10 }}
-                        color={BaseColor.ColorBlack}
+                        color={BaseColor.ColorWhite}
                         onPress={() => { navigation.openDrawer() }}
                     />
                 ),
-                headerTitle: 'Team Assist'
+                headerTitle: () => (
+                    <HeaderComponent/>
+                ),
+                headerStyle:{
+                    backgroundColor: BaseColor.CommonTextColor
+                }
             }}
         />
     </Stack.Navigator>
@@ -55,6 +61,14 @@ function AppStack() {
             </Drawer.Navigator>
         </NavigationContainer>
     );
+}
+
+export class HeaderComponent extends Component{
+    render(){
+        return(
+            <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Team Assist</Text>
+        );
+    }
 }
 
 export default AppStack;
