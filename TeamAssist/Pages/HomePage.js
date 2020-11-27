@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Header, Item, Left, Text } from 'native-base';
 import BaseColor from '../Core/BaseTheme';
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -11,7 +11,12 @@ const data = [
     { time: "4:30 PM", count: '03', account: 'EPFDI', contact: 'AMC of Desktop' },
     { time: "6:30 PM", count: '04', account: 'EPFDI', contact: 'AMC of Desktop' },
     { time: "7:30 PM", count: '05', account: 'EPFDI', contact: 'AMC of Desktop' },
-    { time: "8:30 PM", count: '06', account: 'EPFDI', contact: 'AMC of Desktop' }
+    { time: "8:30 PM", count: '06', account: 'EPFDI', contact: 'AMC of Desktop' },
+    { time: "8:30 PM", count: '07', account: 'EPFDI', contact: 'AMC of Desktop' },
+    { time: "9:30 PM", count: '08', account: 'EPFDI', contact: 'AMC of Desktop' },
+    { time: "10:30 PM", count: '09', account: 'EPFDI', contact: 'AMC of Desktop' },
+    { time: "11:30 PM", count: '10', account: 'EPFDI', contact: 'AMC of Desktop' },
+    { time: "12:30 PM", count: '11', account: 'EPFDI', contact: 'AMC of Desktop' }
 
 ]
 
@@ -47,27 +52,29 @@ export default class HomePage extends Component {
 
                 <FlatList
                     data={data}
+                    style={{margin:20}}
                     renderItem={({ item }) =>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CallDetailsPage')}>
+                            <Card style={styles.flatListCard}>
 
-                        <Card style={{ width: 350, alignSelf: 'center'}}>
-                            
                                 <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: BaseColor.SecondContainer, height: 40, width: 40, borderRadius: 20, flexDirection: 'row',marginLeft:10,marginTop:10 }}>
-                                        <Text style={{ marginLeft: 10, marginTop: 10 }}>{item.count}</Text>
+                                    <View style={styles.itemCount}>
+                                        <Text style={styles.itemCountText}>{item.count}</Text>
                                     </View>
-                                    <Text style={{ marginLeft: 20, marginTop: 14, color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 17 }}>{item.time}</Text>
+                                    <Text style={styles.timeText}>{item.time}</Text>
                                 </View>
-                            
-                            
-                                <View style={{flexDirection:'row',marginLeft:20,marginTop:10 }}>
-                                    <Text style={{color:BaseColor.CommonTextColor}}>Account : </Text>
-                                    <Text style={{color:BaseColor.CommonTextColor,fontWeight:'bold',fontSize:16}}>{item.account}</Text>
+
+
+                                <View style={{ flexDirection: 'row', marginLeft: 20, marginTop: 10 }}>
+                                    <Text style={{ color: BaseColor.CommonTextColor }}>Account : </Text>
+                                    <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.account}</Text>
                                     <Text> | </Text>
-                                    <Text style={{color:BaseColor.CommonTextColor}}>Contact : </Text>
-                                    <Text style={{color:BaseColor.CommonTextColor,fontWeight:'bold',fontSize:16}}>{item.contact}</Text>
+                                    <Text style={{ color: BaseColor.CommonTextColor }}>Contact : </Text>
+                                    <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.contact}</Text>
                                 </View>
-                            
-                        </Card>
+
+                            </Card>
+                        </TouchableOpacity>
                     }
                 />
 
@@ -127,5 +134,30 @@ const styles = StyleSheet.create({
         color: BaseColor.ColorWhite,
         fontSize: 16,
         padding: 5
+    },
+    flatListCard:{ 
+        width: 350, 
+        alignSelf: 'center', 
+        marginBottom:20
+    },
+    itemCount:{ 
+        backgroundColor: "#e6e6e6", 
+        height: 40, 
+        width: 40, 
+        borderRadius: 20, 
+        flexDirection: 'row', 
+        marginLeft: 10, 
+        marginTop: 10 
+    },
+    itemCountText:{ 
+        marginLeft: 10, 
+        marginTop: 10 
+    },
+    timeText:{ 
+        marginLeft: 20, 
+        marginTop: 14, 
+        color: BaseColor.CommonTextColor, 
+        fontWeight: 'bold', 
+        fontSize: 17 
     }
 })

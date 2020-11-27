@@ -3,14 +3,17 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {Text} from 'react-native'
+import {Text,View} from 'react-native'
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Back from 'react-native-vector-icons/AntDesign';
 import BaseColor from './Core/BaseTheme';
 import Splash from './Pages/Splash'
 import WelcomePage from './Pages/WelcomePage'
 import SignInPage from './Pages/SignInPage';
 import OtpPage from './Pages/OtpPage';
 import HomePage from './Pages/HomePage';
+import CallDetailsPage from './Pages/CallDetailsPage';
+import CallClosedPage from './Pages/CallClosedPage';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,6 +51,46 @@ const StackScreen = ({ navigation }) => (
                 }
             }}
         />
+        <Stack.Screen
+        name="CallDetailsPage" component={CallDetailsPage}
+        options={{
+            headerLeft: () => (
+                <Back
+                    name='left'
+                    size={30}
+                    style={{ margin: 10 }}
+                    color={BaseColor.ColorWhite}
+                    onPress={() =>navigation.goBack()}
+                />
+            ),
+            headerTitle: () => (
+                <DetailsHeaderComponent/>
+            ),
+            headerStyle:{
+                backgroundColor: BaseColor.CommonTextColor
+            }
+        }}
+        />
+        <Stack.Screen
+        name="CallClosedPage" component={CallClosedPage}
+        options={{
+            headerLeft: () => (
+                <Back
+                    name='left'
+                    size={30}
+                    style={{ margin: 10 }}
+                    color={BaseColor.ColorWhite}
+                    onPress={() =>navigation.goBack()}
+                />
+            ),
+            headerTitle: () => (
+                <ClosedCallHeader/>
+            ),
+            headerStyle:{
+                backgroundColor: BaseColor.CommonTextColor
+            }
+        }}
+        />
     </Stack.Navigator>
 );
 
@@ -67,6 +110,27 @@ export class HeaderComponent extends Component{
     render(){
         return(
             <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Team Assist</Text>
+        );
+    }
+}
+
+export class DetailsHeaderComponent extends Component{
+    render(){
+        return(
+            <View>
+                <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Task of the day</Text>
+                <Text style={{color:BaseColor.ColorWhite, fontSize:13}}>Date and Time</Text>
+            </View>
+        );
+    }
+}
+
+export class ClosedCallHeader extends Component{
+    render(){
+        return(
+            <View>
+                <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Call closed</Text>
+            </View>
         );
     }
 }
