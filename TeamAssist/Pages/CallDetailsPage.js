@@ -111,7 +111,7 @@ export default class CallDetailsPage extends Component {
 
                         <View>
                             <View style={styles.accountTextView}>
-                                <Text style={styles.accountText}>Secondaru issues</Text>
+                                <Text style={styles.accountText}>Secondary issues</Text>
                             </View>
 
                             <Picker

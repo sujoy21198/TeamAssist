@@ -76,7 +76,10 @@ export default class CallClosedPage extends Component {
 
                 <Input></Input>
 
-                <Button style={{alignSelf:'flex-end',borderRadius:5,marginRight:22,backgroundColor:BaseColor.CommonTextColor}}>
+                <Button 
+                style={{alignSelf:'flex-end',borderRadius:5,marginRight:22,backgroundColor:BaseColor.CommonTextColor}}
+                onPress={() => this.props.navigation.navigate('CallReshedulePage')}
+                >
                     <Text>Close & Submit</Text>
                 </Button>
 
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
         width: 40,
         borderRadius: 20,
         flexDirection: 'row',
-        marginLeft: 163,
+        marginLeft: 174,
         marginTop: 5,
     },
     signatureIcon:{
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
         width: 40,
         borderRadius: 20,
         flexDirection: 'row',
-        marginLeft: 150,
+        marginLeft: 160,
         marginTop: 5,
     },
     pictureCountText:{

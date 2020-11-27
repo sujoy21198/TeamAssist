@@ -14,6 +14,8 @@ import OtpPage from './Pages/OtpPage';
 import HomePage from './Pages/HomePage';
 import CallDetailsPage from './Pages/CallDetailsPage';
 import CallClosedPage from './Pages/CallClosedPage';
+import CallReshedulePage from './Pages/CallReshedulePage';
+import CallPendingPage from './Pages/CallPendingPage';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -91,6 +93,46 @@ const StackScreen = ({ navigation }) => (
             }
         }}
         />
+        <Stack.Screen 
+        name="CallReshedulePage" component={CallReshedulePage}
+        options={{
+            headerLeft: () => (
+                <Back
+                    name='left'
+                    size={30}
+                    style={{ margin: 10 }}
+                    color={BaseColor.ColorWhite}
+                    onPress={() =>navigation.goBack()}
+                />
+            ),
+            headerTitle: () => (
+                <SheduleCallHeader/>
+            ),
+            headerStyle:{
+                backgroundColor: BaseColor.CommonTextColor
+            }
+        }}
+        />
+        <Stack.Screen 
+        name="CallPendingPage" component={CallPendingPage}
+        options={{
+            headerLeft: () => (
+                <Back
+                    name='left'
+                    size={30}
+                    style={{ margin: 10 }}
+                    color={BaseColor.ColorWhite}
+                    onPress={() =>navigation.goBack()}
+                />
+            ),
+            headerTitle: () => (
+                <PendingCall/>
+            ),
+            headerStyle:{
+                backgroundColor: BaseColor.CommonTextColor
+            }
+        }}
+        />
     </Stack.Navigator>
 );
 
@@ -135,4 +177,24 @@ export class ClosedCallHeader extends Component{
     }
 }
 
+
+export class SheduleCallHeader extends Component{
+    render(){
+        return(
+            <View>
+                <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Reshedule call</Text>
+            </View>
+        );
+    }
+}
+
+export class PendingCall extends Component{
+    render(){
+        return(
+            <View>
+                <Text style={{color:BaseColor.ColorWhite, fontSize:20}}>Pending call</Text>
+            </View>
+        );
+    }
+}
 export default AppStack;
