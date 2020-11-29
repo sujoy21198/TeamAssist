@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, ScrollView,TouchableOpacity} from 'react-native';
 import { Item, Text, Input, Picker, Footer, Button } from 'native-base';
 import BaseColor from '../Core/BaseTheme';
-import Icon from 'react-native-vector-icons/SimpleLineIcons'
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Signature from 'react-native-vector-icons/FontAwesome5';
 
 export default class CallClosedPage extends Component {
     render() {
@@ -65,8 +66,8 @@ export default class CallClosedPage extends Component {
                     <View style={{flexDirection:'row'}}>
                     <Text style={{margin:10}}>Take a signature</Text>
                     <View style={styles.signatureIcon}>
-                        <Icon
-                        name="camera"
+                        <Signature
+                        name="file-signature"
                         size={25}
                         style={{marginLeft:7,marginTop:5}}
                         />
@@ -74,16 +75,22 @@ export default class CallClosedPage extends Component {
                     </View>
                 </View>
 
-                <Input></Input>
+                <View style={{margin:20}}></View>
 
-                <Button 
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('CallReshedulePage')}>
+                    <View style={styles.buttonStyle}>
+                        <Text style={styles.buttonText}>Close and submit</Text>
+                    </View>
+                </TouchableOpacity>
+
+                {/* <Button 
                 style={{alignSelf:'flex-end',borderRadius:5,marginRight:22,backgroundColor:BaseColor.CommonTextColor}}
                 onPress={() => this.props.navigation.navigate('CallReshedulePage')}
                 >
                     <Text>Close & Submit</Text>
-                </Button>
+                </Button> */}
 
-                <Input></Input>
+                <View style={{margin:20}}></View>
                 </ScrollView>
                 
             </SafeAreaView>
@@ -204,5 +211,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 30,
         marginTop: 10
+    },
+    buttonStyle:{
+        backgroundColor:BaseColor.CommonTextColor,
+        width:140,
+        marginTop:20,
+        alignSelf:'flex-end',
+        borderRadius: 10,
+        height:40,
+        marginRight:20
+    },
+    buttonText:{
+        color: BaseColor.ColorWhite,
+        fontFamily: 'Poppins-Light',
+        alignSelf:'center',
+        marginTop:6
     }
 })

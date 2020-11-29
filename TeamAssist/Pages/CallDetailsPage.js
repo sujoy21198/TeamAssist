@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
-import { Item, Text, Input, Picker, Footer,Button } from 'native-base';
+import { SafeAreaView, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Item, Text, Input, Picker, Footer, Button } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons'
 import BaseColor from '../Core/BaseTheme';
 
@@ -31,7 +31,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.accountTextBox}>
-                        <Text style={{ marginLeft: 10,marginTop:10 }}>EPFD</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>EPFD</Text>
                     </View>
 
                     <View style={styles.accountTextView}>
@@ -39,7 +39,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.accountTextBox}>
-                        <Text style={{ marginLeft: 10,marginTop:10 }}>AMC of desktop</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>AMC of desktop</Text>
                     </View>
 
                     <View style={styles.accountTextView}>
@@ -47,13 +47,13 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.calldetailsBox}>
-                        <View style={{flexDirection:'row'}}>
-                        <Text style={{ marginLeft: 10,marginTop:10 }}>Howrah</Text>
-                        <Icon
-                        name="location"
-                        size={30}
-                        style={{marginLeft:240,marginTop:30}}
-                        />
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ marginLeft: 10, marginTop: 10 }}>Howrah</Text>
+                            <Icon
+                                name="location"
+                                size={30}
+                                style={{ marginLeft: 240, marginTop: 30 }}
+                            />
                         </View>
                     </View>
 
@@ -62,7 +62,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.calldetailsBox}>
-                        <Text style={{ marginLeft: 10,marginTop:10 }}>hi this is details of the calls assigned to an employee</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>hi this is details of the calls assigned to an employee</Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -72,7 +72,7 @@ export default class CallDetailsPage extends Component {
                             </View>
 
                             <View style={styles.rowTextBox}>
-                                <Text style={{ marginLeft: 10 ,marginTop:10}}>Account</Text>
+                                <Text style={{ marginLeft: 10, marginTop: 10 }}>Account</Text>
                             </View>
                         </View>
 
@@ -82,7 +82,7 @@ export default class CallDetailsPage extends Component {
                             </View>
 
                             <View style={styles.rowTextBox}>
-                                <Text style={{ marginLeft: 10 ,marginTop:10}}>A k Ghosh</Text>
+                                <Text style={{ marginLeft: 10, marginTop: 10 }}>A k Ghosh</Text>
                             </View>
                         </View>
                     </View>
@@ -132,8 +132,8 @@ export default class CallDetailsPage extends Component {
 
                     <Item></Item>
 
-                    <View style={{flexDirection:'row',marginTop:20}}>
-                        <Button style={{ backgroundColor: BaseColor.CommonTextColor, marginRight: 30, borderRadius: 10, marginLeft:20,height:40,width:90 }}>
+                    <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                        {/* <Button style={{ backgroundColor: BaseColor.CommonTextColor, marginRight: 30, borderRadius: 10, marginLeft:20,height:40,width:90 }}>
                             <Text style={{ fontSize: 12 }}>Close call</Text>
                         </Button>
 
@@ -145,25 +145,29 @@ export default class CallDetailsPage extends Component {
 
                         <Button style={{ backgroundColor: "#bb0808", borderRadius: 10,marginRight:0,height:40,width:90 }}>
                             <Text style={{ fontSize: 12 }}>Pending call</Text>
-                        </Button>
+                        </Button> */}
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CallClosedPage')}>
+                            <View style={styles.closeCallStyle}>
+                                <Text style={styles.buttonText}>Close call</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CallClosedPage')}>
+                            <View style={styles.resheduleCallStyle}>
+                                <Text style={styles.resheduleCallText}>Reshedule call</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CallClosedPage')}>
+                            <View style={styles.pendingCallStyle}>
+                                <Text style={styles.buttonText}>Pending call</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
 
-                    <Input></Input>
+                    <View style={{margin:20}}></View>
 
                 </ScrollView>
-                {/* <Footer style={styles.footer}>
-                        <Button style={{ backgroundColor: BaseColor.CommonTextColor, marginRight: 10, borderRadius: 10 }}>
-                            <Text style={{ fontSize: 12 }}>Close Call</Text>
-                        </Button>
-
-                        <Button style={{ backgroundColor: "#19bc45", marginRight: 10, borderRadius: 10 }}>
-                            <Text style={{ fontSize: 12 }}>Reshedule call</Text>
-                        </Button>
-
-                        <Button style={{ backgroundColor: "#bb0808", borderRadius: 10 }}>
-                            <Text style={{ fontSize: 12 }}>pending call</Text>
-                        </Button>
-                    </Footer> */}                    
             </SafeAreaView>
         );
     }
@@ -266,5 +270,44 @@ const styles = StyleSheet.create({
         height: 70,
         backgroundColor: BaseColor.ColorWhite,
         paddingBottom: 20
+    },
+    buttonText:{
+        color: BaseColor.ColorWhite,
+        fontFamily: 'Poppins-Light',
+        alignSelf:'center',
+        marginTop:6
+    },
+    closeCallStyle:{
+        backgroundColor:BaseColor.CommonTextColor,
+        width:100,
+        marginTop:40,
+        borderRadius: 10,
+        height:40,
+        marginLeft:20
+    },
+    resheduleCallStyle:{
+        backgroundColor:"#19bc45",
+        width:120,
+        marginTop:40,
+        borderRadius: 10,
+        height:40,
+        marginLeft:10
+    },
+    pendingCallStyle:{
+        backgroundColor:"#bb0808",
+        width:100,
+        marginTop:40,
+        borderRadius: 10,
+        height:40,
+        marginRight:20,
+        marginLeft:10
+    },
+    resheduleCallText:{
+        color: BaseColor.ColorWhite,
+        fontFamily: 'Poppins-Light',
+        alignSelf:'center',
+        marginTop:6,
+        fontSize:15,
+        padding:1
     }
 })

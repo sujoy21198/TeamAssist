@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar ,TouchableOpacity} from 'react-native';
 import {Button, Text} from 'native-base'
 import BaseColor from '../Core/BaseTheme';
 import Webstep from '../assets/Webstep';
@@ -18,9 +18,15 @@ export default class WelcomPage extends Component {
                     <Text style={styles.subTitle}>Bring together your files, your projects and peoples.</Text>
                 </View>
 
-                <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('SignInPage')}>
+                {/* <Button style={styles.buttonStyle} onPress={() => this.props.navigation.navigate('SignInPage')}>
                     <Text style={styles.buttonText}>         Log in</Text>
-                </Button>
+                </Button> */}
+                <TouchableOpacity  onPress={() => this.props.navigation.navigate('SignInPage')}>
+                    <View style={styles.buttonStyle}>
+                        <Text style={styles.buttonText}>Log in</Text>
+                    </View>
+                </TouchableOpacity>
+
             </SafeAreaView>
         );
     }
@@ -58,13 +64,16 @@ const styles = StyleSheet.create({
     },
     buttonStyle:{
         backgroundColor:BaseColor.CommonTextColor,
-        width:150,
+        width:140,
         marginTop:80,
         alignSelf:'center',
         borderRadius: 10,
+        height:40
     },
     buttonText:{
         color: BaseColor.ColorWhite,
         fontFamily: 'Poppins-Light',
+        alignSelf:'center',
+        marginTop:6
     }
 });
