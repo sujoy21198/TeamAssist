@@ -3,14 +3,46 @@ import { StyleSheet, View, Alert, TextInput, SafeAreaView, StatusBar,TouchableOp
 import { Text,Item } from 'native-base';
 import OTPTextView from 'react-native-otp-textinput';
 import BaseColor from '../Core/BaseTheme';
+import axios from 'axios';
 
 export default class OtpPage extends Component {
 
-    resend = () => {
-        alert("resend Pressed");
+    constructor(props){
+        super(props);
+        this.state={
+            phone : '',
+            otp : ''
+        }
+        this.state.phone = this.props.route.params.phone
+        console.log(this.state.phone)
+        
     }
 
+    resend = () => {
+        alert(this.state.otp);
+    }
+
+    checkOtp = async() => {
+        var phone = this.state.phone;
+        var otp = this.state.otp;
+        if(!otp || otp.length != 4){
+            alert("plz enter 4 digit code")
+            return;
+        }
+        await axios.post("http://teamassist.websteptech.co.uk/api/OTPcheck",{
+            phone: phone,
+            otp_code : otp
+        }).then(function (response) {
+            console.log(response.data)
+            alert(response.data.title)
+        })
+        .catch(function (error) {
+            //console.log(error);
+        });
+    }
     render() {
+        // const {phone} = this.props.route.params
+        // alert(phone)
         return (
             // <View style={styles.container}>
             //     <OTPTextView
@@ -30,7 +62,7 @@ export default class OtpPage extends Component {
                     <Text style={styles.subtitle}>Enter the verification code we just sent you on your mobile number</Text>
                 </View>
                 <OTPTextView
-                    handleTextChange={() => { }}
+                    handleTextChange={(text) => {this.setState({otp:text}) }}
                     containerStyle={styles.otpContainer}
                     textInputStyle={styles.roundedTextInput}
                     inputCount={4}
@@ -40,7 +72,8 @@ export default class OtpPage extends Component {
                 <Item style={{marginTop:20}}></Item>
                 <View style={styles.resendView}>
                 <Text style={styles.resendText}>If you didn't receive a code !</Text>
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomePage')}>
+                {/* this.props.navigation.navigate('HomePage') */}
+                <TouchableOpacity onPress={()=> this.checkOtp()}>
                 <Text style={styles.whiteText}>Resend</Text>
                 </TouchableOpacity>
                 </View>
