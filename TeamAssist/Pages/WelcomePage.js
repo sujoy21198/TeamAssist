@@ -4,8 +4,22 @@ import {Button, Text} from 'native-base'
 import BaseColor from '../Core/BaseTheme';
 import Webstep from '../assets/Webstep';
 import Shadow from '../assets/Shadow'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class WelcomPage extends Component {
+    // componentDidMount(){
+    //     this.load();
+    // }
+
+    // load = async() => {
+    //     let value = await AsyncStorage.getItem('username')
+    //     if(value){
+    //         this.props.navigation.navigate('HomePage');
+    //     }
+    //     AsyncStorage.removeItem('username');
+    //     //value = AsyncStorage.setItem(null);
+    //     console.log(value)
+    // }
     render() {
         return (
             <SafeAreaView style={styles.container}>

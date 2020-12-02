@@ -5,6 +5,7 @@ import Webstep from '../assets/Webstep';
 import BaseColor from '../Core/BaseTheme';
 import Shadow from '../assets/Shadow';
 
+
 export default class Splash extends Component{
     constructor(props){
         super(props);
@@ -15,6 +16,16 @@ export default class Splash extends Component{
             });
         },3500);
     }
+    // componentDidMount(){
+    //     this.load();
+    // }
+
+    // load = async() => {
+    //     let value = await AsyncStorage.getItem('username')
+    //     if(value){
+    //         this.props.navigation.navigate('HomePage');
+    //     }
+    // }
 
     render(){
         return(

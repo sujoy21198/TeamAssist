@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { SafeAreaView, View, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, StyleSheet, StatusBar, TouchableOpacity,Keyboard, ActivityIndicator } from 'react-native';
 import { Text, Input, Item, Button } from 'native-base';
 import BaseColor from '../Core/BaseTheme';
-import UserDataService from '../DataAccess/UserDataService';
+import CustomIndicator from '../Core/CustomIndicator';
 import axios from 'axios';
 
 export default class SignInPage extends Component {
@@ -11,32 +11,20 @@ export default class SignInPage extends Component {
         super();
         this.state = {
             phone: "",
-            redirect: false
+            redirect: false,
+            isLoading: false
         }
     }
-
-    // showstate = () =>{
-    //     alert(this.state.phone);
-    // }
-
-
-    // sendOtp = () => {
-
-    //     var phone = this.state.phone;
-    //     if(!phone || phone.length != 10){
-    //         alert("please enter a valid phone number")
-    //     }else{
-    //         UserDataService.SendOtp(phone);
-    //     }
-    // }
-
-
     sendOtp = async () => {
+        Keyboard.dismiss();
         var resp;
         var redirect = false;
+        var flag = false;
+        this.setState({ isLoading: true })
         var phone = this.state.phone;
         if (!phone || phone.length != 10) {
             alert("please enter a valid phone number")
+            this.setState({isLoading:false})
             return;
         }
         await axios.post("http://teamassist.websteptech.co.uk/api/userlogin", {
@@ -46,24 +34,30 @@ export default class SignInPage extends Component {
                 resp = response.data.resp;
                 if (resp === "success") {
                     redirect = true;
-                    //alert(redirect)
+                    flag = true;
                 } else {
                     alert(response.data.message)
+                    flag= true;
                 }
                 console.log(response.data);
             })
             .catch(function (error) {
                 //console.log(error);
             });
+        
 
         if (redirect === true) {
-            alert(redirect)
+            //alert(redirect)
             this.props.navigation.navigate({
                 name: 'OtpPage',
-                params : {
-                    phone : this.state.phone
+                params: {
+                    phone: this.state.phone
                 }
             })
+        }
+
+        if(flag === true){
+            this.setState({isLoading:false})
         }
     }
 
@@ -71,8 +65,8 @@ export default class SignInPage extends Component {
         var phone = this.state.phone;
         this.props.navigation.navigate({
             name: 'OtpPage',
-            params : {
-                phone : phone
+            params: {
+                phone: phone
             }
         })
 
@@ -110,6 +104,7 @@ export default class SignInPage extends Component {
                         <Text style={styles.buttonText}>Log in</Text>
                     </View>
                 </TouchableOpacity>
+                <CustomIndicator IsLoading={this.state.isLoading} />
             </SafeAreaView>
         );
     }
