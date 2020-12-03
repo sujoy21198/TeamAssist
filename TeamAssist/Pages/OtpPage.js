@@ -88,7 +88,8 @@ export default class OtpPage extends Component {
             flag = true;
             redirect = true;
             AsyncStorage.setItem("username", response.data.username);
-            //AsyncStorage.setItem("useremailID",response.data.useremailID);
+            AsyncStorage.setItem("useremailID",response.data.useremailID);
+            AsyncStorage.setItem("login_userID",response.data.login_userID);
             //AsyncStorage.getItem("username", response.data.username);
             //AsyncStorage.getItem("useremailID",response.data.useremailID);
         })

@@ -5,20 +5,32 @@ import BaseColor from '../Core/BaseTheme';
 import Webstep from '../assets/Webstep';
 import Shadow from '../assets/Shadow'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomIndicator from '../Core/CustomIndicator';
 
 export default class WelcomPage extends Component {
+
+    constructor(){
+        super();
+        this.state={
+            isLoading: false,
+            buttonText:'Log In'
+        }
+    }
+
     // componentDidMount(){
     //     this.load();
     // }
 
     // load = async() => {
     //     let value = await AsyncStorage.getItem('username')
+    //     let UID = await AsyncStorage.getItem('login_userID')
     //     if(value){
     //         this.props.navigation.navigate('HomePage');
+    //         this.setState({buttonText : value})
     //     }
-    //     AsyncStorage.removeItem('username');
+    //     //AsyncStorage.removeItem('username');
     //     //value = AsyncStorage.setItem(null);
-    //     console.log(value)
+    //     console.log(UID)
     // }
     render() {
         return (
@@ -37,10 +49,10 @@ export default class WelcomPage extends Component {
                 </Button> */}
                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('SignInPage')}>
                     <View style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Log in</Text>
+                        <Text style={styles.buttonText}>{this.state.buttonText}</Text>
                     </View>
                 </TouchableOpacity>
-
+                <CustomIndicator IsLoading={this.state.isLoading}/>
             </SafeAreaView>
         );
     }

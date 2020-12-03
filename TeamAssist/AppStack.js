@@ -16,6 +16,7 @@ import CallDetailsPage from './Pages/CallDetailsPage';
 import CallClosedPage from './Pages/CallClosedPage';
 import CallReshedulePage from './Pages/CallReshedulePage';
 import CallPendingPage from './Pages/CallPendingPage';
+import DrawerContentPage from './Pages/DrawerContentPage';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -140,8 +141,8 @@ const StackScreen = ({ navigation }) => (
 function AppStack() {
     return (
         <NavigationContainer>
-            <Drawer.Navigator>
-                <Drawer.Screen name="Team Assist" component={StackScreen}
+            <Drawer.Navigator drawerContent={props => <DrawerContentPage {...props}/>}>
+                <Drawer.Screen name="Team Assist" component={StackScreen} 
                 />
             </Drawer.Navigator>
         </NavigationContainer>
