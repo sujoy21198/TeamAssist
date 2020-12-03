@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { FlatList, SafeAreaView, StyleSheet, View, TouchableOpacity,Alert,BackHandler } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View, TouchableOpacity, Alert, BackHandler } from 'react-native';
 import { Card, CardItem, Header, Item, Left, Text, DatePicker } from 'native-base';
 import BaseColor from '../Core/BaseTheme';
 import Icon from 'react-native-vector-icons/EvilIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import EmptyPage from './EmptyPage'
+import { call } from 'react-native-reanimated';
 
 
 const data = [
@@ -35,7 +36,8 @@ export default class HomePage extends Component {
             year: '',
             task: '',
             login_userID: '',
-            empty: false
+            empty: false,
+            task:[],
         }
     }
 
@@ -51,34 +53,34 @@ export default class HomePage extends Component {
     //     return true;
     // }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setTaskDateTime();
         this.loadUserDetails();
         this.showTodayCallList();
     }
 
-    loadUserDetails = async() => {
+    loadUserDetails = async () => {
         let value = await AsyncStorage.getItem('login_userID')
-        this.setState({login_userID : value})
-        console.log(this.state.login_userID);
+        this.setState({ login_userID: value })
+        console.log("LOGIN USER ID " + this.state.login_userID);
     }
 
     // checkLoggedIn = async() =>{
     //     let value = await AsyncStorage.getItem('username')
     //     if(value){
-            
+
     //     }
     // }
 
     setTaskDateTime = () => {
         var date = new Date().getDate();
-        var month = new Date().getMonth()+1;
+        var month = new Date().getMonth() + 1;
         var year = new Date().getFullYear();
-        
 
-        this.setState({date : date})
-        this.setState({month : month})
-        this.setState({year : year})
+
+        this.setState({ date: date })
+        this.setState({ month: month })
+        this.setState({ year: year })
     }
 
     showDate = () => {
@@ -90,29 +92,61 @@ export default class HomePage extends Component {
 
         console.log(date, month, time)
     }
+    checkCallId = (value) => {
+        
+        this.props.navigation.navigate({
+            name: 'CallDetailsPage',
+            params: {
+                call_log_id: value
+            }
+        })
+        //alert(value);
+    }
 
-    showTodayCallList = async() =>{
+    showTodayCallList = async () => {
         var empty;
-        await axios.post("http://teamassist.websteptech.co.uk/api/gettodaytask",{
-            login_userID: this.state.login_userID
-        }).then(function(response) {
+        var taskArray=[];
+        //console.log("hi"+await AsyncStorage.getItem('login_userID'));
+        var call_log_id ;
+        //var id = this.state.login_userID
+        await axios.post("http://teamassist.websteptech.co.uk/api/gettodaytask", {
+            login_userID: await AsyncStorage.getItem('login_userID')
+        }).then(function (response) {
             console.log(response.data.today_log_list)
             console.log(response.data)
             empty = response.data.today_log_list;
+            taskArray = response.data.today_log_list;
+            //call_log_id = taskArray.map(i => i.call_log_id);
+            //AsyncStorage.setItem('call_log_id',response.data.call_log_id)
+            //alert(call_log_id)
         }).catch(function (error) {
             flag = true;
             console.log(error);
         });
 
-        if(empty === 'No Log Found'){
-            this.setState({empty : true})
+        this.setState({
+            task : taskArray
+        })
+
+        //console.log(this.state.task)
+        //console.log(call_log_id)
+
+        // this.setState({call_log_id: call_log_id})
+        // console.log(this.state.call_log_id)
+
+
+        if (empty === 'No Log Found') {
+            this.setState({ empty: true })
         }
     }
     render() {
         var empty = this.state.empty;
-        if(empty === true){
-            return(
-                <EmptyPage/>
+        var task = this.state.task;
+        console.log(task)
+        //console.log(task)
+        if (empty === true) {
+            return (
+                <EmptyPage />
             )
         }
         return (
@@ -120,7 +154,7 @@ export default class HomePage extends Component {
                 <View style={styles.secondContainer}>
                     <Text style={styles.secondContainerText}>Today's Tasks</Text>
                     <View style={{ flexDirection: 'row' }}>
-        <Text style={styles.datetimeText}>{this.state.date}/{this.state.month}/{this.state.year}</Text>
+                        <Text style={styles.datetimeText}>{this.state.date}/{this.state.month}/{this.state.year}</Text>
                         <Icon
                             name='calendar'
                             size={30}
@@ -143,35 +177,35 @@ export default class HomePage extends Component {
                 <Item style={{ marginTop: 30 }}></Item>
 
                 <View>
-                <FlatList
-                    data={data}
-                    style={{ margin: 20 }}
-                    renderItem={({ item }) =>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CallDetailsPage')}>
-                            <Card style={styles.flatListCard}>
+                    <FlatList
+                        data={task}
+                        style={{ margin: 20 }}
+                        renderItem={({ item }) =>
+                            <TouchableOpacity onPress={() => this.checkCallId(item.call_log_id)}>
+                                <Card style={styles.flatListCard}>
 
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={styles.itemCount}>
-                                        <Text style={styles.itemCountText}>{item.count}</Text>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <View style={styles.itemCount}>
+                                            <Text style={styles.itemCountText}>{item.call_log_id}</Text>
+                                        </View>
+                                        <Text style={styles.timeText}>{item.log_time}</Text>
                                     </View>
-                                    <Text style={styles.timeText}>{item.time}</Text>
-                                </View>
 
 
-                                <View style={{ flexDirection: 'row', marginLeft: 20, marginTop: 10 }}>
-                                    <Text style={{ color: BaseColor.CommonTextColor }}>Account : </Text>
-                                    <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.account}</Text>
-                                    <Text> | </Text>
-                                    <Text style={{ color: BaseColor.CommonTextColor }}>Contact : </Text>
-                                    <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.contact}</Text>
-                                </View>
+                                    <View style={{ flexDirection: 'row', marginLeft: 20, marginTop: 10 }}>
+                                        <Text style={{ color: BaseColor.CommonTextColor }}>Account : </Text>
+                                        <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.log_account}</Text>
+                                        <Text> | </Text>
+                                        <Text style={{ color: BaseColor.CommonTextColor }}>Contact : </Text>
+                                        <Text style={{ color: BaseColor.CommonTextColor, fontWeight: 'bold', fontSize: 16 }}>{item.log_contract_name}</Text>
+                                    </View>
 
-                            </Card>
-                        </TouchableOpacity>
-                    }
-                />
+                                </Card>
+                            </TouchableOpacity>
+                        }
+                    />
                 </View>
-                
+
 
             </SafeAreaView>
         );

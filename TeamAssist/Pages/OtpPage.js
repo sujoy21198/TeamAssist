@@ -106,6 +106,13 @@ export default class OtpPage extends Component {
 
         if (redirect === true) {
             //alert(redirect)
+            // this.props.navigation.reset({
+            //     index:0,
+            //     routes:[{name:"HomePage"}],
+            //     params: {
+            //         phone: this.state.phone
+            //     }
+            // })
             this.props.navigation.navigate({
                 name: 'HomePage',
                 params: {

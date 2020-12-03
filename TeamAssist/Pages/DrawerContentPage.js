@@ -83,6 +83,17 @@ export default class DrawerContentPage extends Component {
         }
     }
 
+    // signOut = async() => {
+    //     await AsyncStorage.removeItem('username');
+    //     await AsyncStorage.removeItem('useremailID');
+    //     await AsyncStorage.removeItem('login_userID');
+
+
+    //     this.props.navigation.navigate({
+    //         name : 'WelcomePage'
+    //     })
+    // }
+
     componentDidMount(){
         this.getUserDetail();
     }
@@ -120,6 +131,7 @@ export default class DrawerContentPage extends Component {
                                     />
                                 )}
                                 label="Sign Out"
+                                onPress={() => {}}
                             />
                         </Drawer.Section>
                     </View>
@@ -138,6 +150,7 @@ export default class DrawerContentPage extends Component {
                     <View style={{ flexDirection: 'row' }}>
                         <Text>Powered by </Text>
                         <PoweredBy />
+                        <Text style={{marginLeft:80}}>ver: 1.0</Text>
                     </View>
                 </Drawer.Section>
             </View>
@@ -171,9 +184,10 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     bottomDrawerSection: {
-        marginBottom: 15,
+        marginBottom: 10,
         borderTopColor: '#f4f4f4',
-        borderTopWidth: 1
+        borderTopWidth: 1,
+        marginLeft:10
     },
     preference: {
         flexDirection: 'row',

@@ -13,7 +13,7 @@ export default class EmptyPage extends Component{
     render(){
         return(
             <View style={{flex:1,backgroundColor:BaseColor.CommonTextColor}}>
-                <TouchableOpacity onPress={()=>this.signout()}>
+                <TouchableOpacity onPress={()=>{}}>
                 <Text style={{color:BaseColor.ColorWhite,fontSize:30,alignSelf:'center',marginTop:300}}>No Task Assigned now</Text>
                 </TouchableOpacity>
                 

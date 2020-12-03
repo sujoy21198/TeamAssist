@@ -3,10 +3,52 @@ import { SafeAreaView, View, StyleSheet, ScrollView, TouchableOpacity } from 're
 import { Item, Text, Input, Picker, Footer, Button } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons'
 import BaseColor from '../Core/BaseTheme';
+import axios from 'axios';
+import { func } from 'prop-types';
 
 
 export default class CallDetailsPage extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            call_log_id:'',
+            details: '',
+            issues: []
+        }
+        this.state.call_log_id = this.props.route.params.call_log_id;
+        // alert(this.state.call_log_id+"hihihi");
+    }
+
+    componentDidMount(){
+        this.showDetails();
+    }
+
+    showDetails = async() => {
+        var details;
+        var issues= [];
+        await axios.post("http://teamassist.websteptech.co.uk/api/getlogdetails",{
+            call_log_id: this.state.call_log_id
+        }).then(function(response){
+            console.log(response.data.call_log_details);
+            details = response.data.call_log_details;
+            issues = details.total_primary_issue_list;
+            //console.log(issues.map(i => i.issue_name));
+        }).catch(function(error){
+            console.log(error)
+        })
+
+        this.setState({
+            details : details,
+            issues : issues
+        })
+
+        //console.log(this.state.details)
+    }
     render() {
+        var details = this.state.details;
+        var issues = [];
+        issues = this.state.issues;
+        //console.log(issues.map(i => i.issue_name))
         return (
             <SafeAreaView>
                 <ScrollView>
@@ -21,9 +63,9 @@ export default class CallDetailsPage extends Component {
 
                     <View style={styles.timeandcountView}>
                         <View style={styles.itemCount}>
-                            <Text style={styles.itemCountText}>01</Text>
+                            <Text style={styles.itemCountText}>{this.state.call_log_id}</Text>
                         </View>
-                        <Text style={styles.timeText}>9:30 AM</Text>
+        <Text style={styles.timeText}>{details.log_time}</Text>
                     </View>
 
                     <View style={styles.accountTextView}>
@@ -31,7 +73,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.accountTextBox}>
-                        <Text style={{ marginLeft: 10, marginTop: 10 }}>EPFD</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>{details.log_account}</Text>
                     </View>
 
                     <View style={styles.accountTextView}>
@@ -39,7 +81,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.accountTextBox}>
-                        <Text style={{ marginLeft: 10, marginTop: 10 }}>AMC of desktop</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>{details.log_contract_name}</Text>
                     </View>
 
                     <View style={styles.accountTextView}>
@@ -48,11 +90,11 @@ export default class CallDetailsPage extends Component {
 
                     <View style={styles.calldetailsBox}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ marginLeft: 10, marginTop: 10 }}>Howrah</Text>
+                            <Text style={{ marginLeft: 10, marginTop: 10 }}>{details.log_address}</Text>
                             <Icon
                                 name="location"
                                 size={30}
-                                style={{ marginLeft: 240, marginTop: 30 }}
+                                style={{ marginLeft: 130, marginTop: 30 }}
                             />
                         </View>
                     </View>
@@ -62,7 +104,7 @@ export default class CallDetailsPage extends Component {
                     </View>
 
                     <View style={styles.calldetailsBox}>
-                        <Text style={{ marginLeft: 10, marginTop: 10 }}>hi this is details of the calls assigned to an employee</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 10 }}>{details.call_details}</Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
