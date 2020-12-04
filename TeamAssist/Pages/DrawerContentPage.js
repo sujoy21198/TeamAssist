@@ -83,16 +83,16 @@ export default class DrawerContentPage extends Component {
         }
     }
 
-    // signOut = async() => {
-    //     await AsyncStorage.removeItem('username');
-    //     await AsyncStorage.removeItem('useremailID');
-    //     await AsyncStorage.removeItem('login_userID');
+    signOut = async() => {
+        await AsyncStorage.removeItem('username');
+        // await AsyncStorage.removeItem('useremailID');
+        // await AsyncStorage.removeItem('login_userID');
 
 
-    //     this.props.navigation.navigate({
-    //         name : 'WelcomePage'
-    //     })
-    // }
+        this.props.navigation.navigate({
+            name : 'WelcomePage'
+        })
+    }
 
     componentDidMount(){
         this.getUserDetail();
@@ -131,7 +131,7 @@ export default class DrawerContentPage extends Component {
                                     />
                                 )}
                                 label="Sign Out"
-                                onPress={() => {}}
+                                onPress={() => this.signOut()}
                             />
                         </Drawer.Section>
                     </View>

@@ -66,6 +66,7 @@ export default class OtpPage extends Component {
         Keyboard.dismiss();
         this.setState({ isLoading: true })
         var flag = false;
+        var id;
         var redirect = false;
         var phone = this.state.phone;
         var otp = this.state.otp;
@@ -89,7 +90,8 @@ export default class OtpPage extends Component {
             redirect = true;
             AsyncStorage.setItem("username", response.data.username);
             AsyncStorage.setItem("useremailID",response.data.useremailID);
-            AsyncStorage.setItem("login_userID",response.data.login_userID);
+            id = AsyncStorage.setItem("login_userID",response.data.login_userID);
+            console.log(id)
             //AsyncStorage.getItem("username", response.data.username);
             //AsyncStorage.getItem("useremailID",response.data.useremailID);
         })
